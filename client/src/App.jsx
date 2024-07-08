@@ -6,7 +6,7 @@ import Main from './components/main/Main'
 function App() {
   return (
     <>
-      <div>
+      <div className='site'>
         <Header></Header>
         <Main></Main>
         <Footer></Footer>
