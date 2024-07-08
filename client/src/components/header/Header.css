@@ -1,0 +1,38 @@
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.black-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 10px;
+}
+
+.site-header a {
+    text-decoration: none;
+}
+
+.main-nav ul {
+    display: flex;
+}
+
+.main-nav li {
+    display: block;
+    list-style: none;
+}
+
+.main-nav a {
+    display: block;
+    padding: 0.5em 1em;
+    font-weight: bold;
+    color: #fff;
+}
+
+.wrapper img {
+    max-width: 10%;
+    height: auto;
+}
