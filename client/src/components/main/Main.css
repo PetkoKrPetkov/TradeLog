@@ -1,0 +1,16 @@
+.flex-item { 
+    border: 1px solid black;
+    padding: 1em;
+    background-color: #eee;
+    flex-shrink: 1;
+    flex: 1 0 40%;
+    background-color: aqua;
+}
+
+.flex-container {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2em;
+    
+}

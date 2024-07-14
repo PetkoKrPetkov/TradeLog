@@ -1,7 +1,15 @@
+import Card from "./card/Card"
+import './Main.css'
+
 export default function Main() {
     return(
-        <main>
-            <p>MAIN</p>
+        <main className="flex-container">
+            
+                <Card></Card>
+                <Card></Card>
+                <Card></Card>
+                <Card></Card>
+            
         </main>
     )
 }
