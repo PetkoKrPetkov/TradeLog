@@ -1,10 +1,13 @@
-import '../header/Header.css'
+import '../header/Header.css';
 
 export default function Header() {
     return (
-        <header className="section site-header">
-            <div className="wrapper black-line">
-                <img src="" alt="logo" />
+        <header className="header">
+            <div className="wrapper">
+                <div className="logo">
+                    <img src="" alt="logo" />
+                    <h1>TradeLog</h1>
+                </div>
                 <nav className="main-nav">
                     <ul>
                         <li><a href="#">Home</a></li>
@@ -18,5 +21,7 @@ export default function Header() {
                 </nav>
             </div>
         </header>
-    )
+    );
 }
+
+

@@ -1,6 +1,18 @@
 .site-footer {
-    background-color: black;
+    background-color: #333;
     color: white;
     padding: 20px 0;
     text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 10px 0;
+    }
 }

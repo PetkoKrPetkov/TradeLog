@@ -1,17 +1,13 @@
-import Card from "./card/Card"
-import './Main.css'
+import { Routes, Route } from 'react-router-dom'
+
+import Home from './home/Home'
 
 export default function Main() {
     return(
-        <main className="flex-container">
-            
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-            
-        </main>
+        
+            <Routes>
+                <Route path='/home' element={<Home></Home>}></Route>
+            </Routes>         
+        
     )
 }

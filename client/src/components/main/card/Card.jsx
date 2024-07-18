@@ -1,9 +1,10 @@
-import './Card.css'
+import React from 'react';
+import styles from './Card.module.css';
 
 export default function Card() {
     return (
-        <div className="flex-item" >
-            <section className="card-container">
+        <div className={styles["flex-item"]}>
+            <section className={styles["card-container"]}>
                 <header>
                     <h4>Long EUR/USD</h4>
                 </header>
@@ -28,9 +29,11 @@ export default function Card() {
                 <footer>
                     <p>Comment</p>
                 </footer>
-
             </section>
         </div>
-    )
+    );
 }
+
+
+
 
