@@ -4,7 +4,7 @@ export default function Header() {
     return (
         <header className="section site-header">
             <div className="wrapper black-line">
-                <img src="./03.Musicfy_Resources/images/logo.jpeg" alt="logo" />
+                <img src="" alt="logo" />
                 <nav className="main-nav">
                     <ul>
                         <li><a href="#">Home</a></li>
