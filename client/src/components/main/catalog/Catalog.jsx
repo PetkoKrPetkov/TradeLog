@@ -1,10 +1,10 @@
-import React from 'react';
 import Card from "../card/Card";
-import styles from './Home.module.css';
+import styles from './Catalog.module.css';
 
-export default function Home() {
+export default function Catalog() {
     return (
         <div className={styles["flex-container"]}>
+            <Card />
             <Card />
             <Card />
             <Card />
@@ -12,5 +12,3 @@ export default function Home() {
         </div>
     );
 }
-
-

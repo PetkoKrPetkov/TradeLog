@@ -1,0 +1,9 @@
+.flex-container {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2em;
+    justify-content: center;
+    padding: 2em;
+    background-color: #f0f2f5;
+}

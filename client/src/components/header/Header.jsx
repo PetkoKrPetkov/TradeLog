@@ -13,12 +13,12 @@ export default function Header() {
                 <nav className="main-nav">
                     <ul>
                         <li><Link to="/">Home</Link></li>
-                        <li><a href="#">Catalog</a></li>
-                        <li><a href="#">Login</a></li>
+                        <li><Link to="/catalog">Catalog</Link></li>
+                        <li><Link to="/login">Login</Link></li>
                         <li><Link to="/register">Register</Link></li>
                         <li><a href="#">Logout</a></li>
-                        <li><a href="#">Create Trade</a></li>
-                        <li><a href="#">Profile</a></li>
+                        <li><Link to="/create-trade">Create Trade</Link></li>
+                        <li><Link to="/profile">Profile</Link></li>
                     </ul>
                 </nav>
             </div>
