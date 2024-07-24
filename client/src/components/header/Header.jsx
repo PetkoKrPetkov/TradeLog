@@ -7,19 +7,16 @@ export default function Header() {
         <header className="header">
             <div className="wrapper">
                 <div className="logo">
-                    <img src="" alt="logo" />
-                    <h1>TradeLog</h1>
+                    <h6><Link to="/">TradeLog</Link></h6>
                 </div>
                 <nav className="main-nav">
-                    <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/catalog">Catalog</Link></li>
-                        <li><Link to="/login">Login</Link></li>
-                        <li><Link to="/register">Register</Link></li>
-                        <li><a href="#">Logout</a></li>
-                        <li><Link to="/create-trade">Create Trade</Link></li>
-                        <li><Link to="/profile">Profile</Link></li>
-                    </ul>
+                        <Link to="/">Home</Link>
+                        <Link to="/catalog">Catalog</Link>
+                        <Link to="/login">Login</Link>
+                        <Link to="/register">Register</Link>
+                        <Link to="/logout">Logout</Link>
+                        <Link to="/create-trade">Create Trade</Link>
+                        <Link to="/profile">Profile</Link>                   
                 </nav>
             </div>
         </header>
