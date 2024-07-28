@@ -2,19 +2,24 @@ import { useEffect, useState } from 'react';
 import * as tradesAPI from '../../../api/trades-api';
 
 import Card from "../card/Card";
-import styles from './Catalog.module.css';
+import styles from './Trades.module.css';
 import Spinner from '../spinner/Spinner';
 
-export default function Catalog() {
+export default function Trades() {
     const [trades, setTrades] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        tradesAPI.getAll()
-            .then(result => {
+        (async () => {
+            try {
+                const result = await tradesAPI.getAll();
                 setTrades(result);
+            } catch (error) {
+                console.error('Error fetching trades:', error);
+            } finally {
                 setLoading(false);
-            });
+            }
+        })();
     }, []);
 
     return (
