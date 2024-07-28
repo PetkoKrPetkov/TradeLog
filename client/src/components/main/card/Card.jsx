@@ -1,30 +1,45 @@
 import React from 'react';
 import styles from './Card.module.css';
 
-export default function Card() {
+export default function Card(
+    {
+        _ownerId,
+        ticker,
+        date,
+        entry,
+        exit,
+        volume,
+        support,
+        ma,
+        price_action,
+        oscilators,
+        _createdOn,
+        _id
+    }
+) {
     return (
         <div className={styles["flex-item"]}>
             <section className={styles["card-container"]}>
                 <header>
-                    <h4>Long EUR/USD</h4>
+                    <h4>{ticker}</h4>
                 </header>
                 <article>
                     <header>
-                        <h5>Date: 14.07.2024</h5>
+                        <h5>Date: {date}</h5>
                     </header>
-                        <p>Entry price: 1.10</p>
-                        <p>Exit price: 1.11</p>
-                        <p>Volume: 5 000$</p>
-                        <p>Profit/Loss: 100$</p>
+                        <p>Entry price: {entry}</p>
+                        <p>Exit price: {exit}</p>
+                        <p>Volume: {volume}$</p>
+                        {/* <p>Profit/Loss: 100$</p> */}
                 </article>
                 <article>
                     <header>
                         <h5>Criteria for entry</h5>
                     </header>
-                        <p>Support</p>
-                        <p>MA</p>
-                        <p>Price action</p>
-                        <p>Oscilators</p>
+                        <p>Support: {support}</p>
+                        <p>MA: {ma}</p>
+                        <p>Price action: {price_action}</p>
+                        <p>Oscilators: {oscilators}</p>
                 </article>
                 <footer>
                     <p>Comment</p>
