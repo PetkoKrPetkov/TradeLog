@@ -12,7 +12,7 @@ export default function Home() {
         (async () => {
             try {
                 const result = await tradesAPI.getAll();
-                setLatestTrades(result.reverse().slice(0 , 3));
+                setLatestTrades(result.reverse().slice(0, 3));
             } catch (error) {
                 console.error('Error fetching trades:', error);
             } finally {
@@ -22,13 +22,17 @@ export default function Home() {
     }, []);
 
     return (
-        <div className={styles["flex-container"]}>
-            {loading 
-                ? <Spinner />
-                : latestTrades.length > 0 
-                    ? latestTrades.map(trade => <Card key={trade._id} {...trade}/>)
-                    : <h3>No recorded trades</h3>
-            }         
+        <div>
+            <h2 className={styles["h2"]}>The latest 3 Trades</h2>
+
+            <div className={styles["flex-container"]}>
+                {loading
+                    ? <Spinner />
+                    : latestTrades.length > 0
+                        ? latestTrades.map(trade => <Card key={trade._id} {...trade} />)
+                        : <h3>No recorded trades</h3>
+                }
+            </div>
         </div>
     );
 }
