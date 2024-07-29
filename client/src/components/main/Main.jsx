@@ -7,6 +7,7 @@ import Trades from './catalog/Trades'
 import Profile from './profile/Profile'
 import CreateTrade from './create-trade/CreateTrade'
 import Details from './details/Details'
+import PageNotFound from './page-not-found/PageNotFound'
 
 
 export default function Main() {
@@ -20,6 +21,7 @@ export default function Main() {
                 <Route path='/trades/:tradeId/details' element={<Details></Details>}></Route>              
                 <Route path='/profile' element={<Profile></Profile>}></Route>
                 <Route path='/create-trade' element={<CreateTrade></CreateTrade>}></Route>
+                <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
             </Routes>         
         
     )
