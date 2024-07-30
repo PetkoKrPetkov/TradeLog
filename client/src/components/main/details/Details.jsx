@@ -5,19 +5,22 @@ import styles from './Details.module.css';
 import Spinner from '../spinner/Spinner';
 
 import * as tradeAPI from '../../../api/trades-api';
+import { useGetOneTrade } from '../../../hooks/useTrades';
 
 export default function Details() {
-    const [trade, setTrade] = useState({});
-    const [loading, setLoading] = useState(true);
-    const { tradeId } = useParams();
+    // const [trade, setTrade] = useState({});
+    // const [loading, setLoading] = useState(true);
+    // const { tradeId } = useParams();
 
-    useEffect(() => {
-        (async () => {
-            const result = await tradeAPI.getOne(tradeId);
-            setTrade(result);
-            setLoading(false);
-        })();
-    }, [tradeId]);
+    // useEffect(() => {
+    //     (async () => {
+    //         const result = await tradeAPI.getOne(tradeId);
+    //         setTrade(result);
+    //         setLoading(false);
+    //     })();
+    // }, [tradeId]);
+
+    const [trade, setTrade, loading, setLoading] = useGetOneTrade();
 
     return (
         <>

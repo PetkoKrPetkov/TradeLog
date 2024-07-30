@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import * as tradesAPI from '../api/trades-api';
+import { useParams } from 'react-router-dom';
 
 export function useGetAllTrades() {
 
     const [trades, setTrades] = useState([]);
     const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(false)
 
     useEffect(() => {
         (async () => {
@@ -21,4 +23,25 @@ export function useGetAllTrades() {
 
     return [trades, setTrades, loading, setLoading];
 
+}
+
+export function useGetOneTrade() {
+    const [trade, setTrade] = useState({});
+    const [loading, setLoading] = useState(true);
+    const { tradeId } = useParams();
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const result = await tradesAPI.getOne(tradeId);
+                setTrade(result);
+            } catch (error) {
+                console.error('Error fetching trades:', error);
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, [tradeId]);
+
+    return [trade, setTrade, loading, setLoading]
 }
