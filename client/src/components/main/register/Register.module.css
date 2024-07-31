@@ -58,3 +58,14 @@
 .button:hover {
     background-color: #555;
 }
+
+.error {
+    color: red;
+    background-color: #ffe6e6;
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
