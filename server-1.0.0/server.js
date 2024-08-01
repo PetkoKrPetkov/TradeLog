@@ -1395,11 +1395,25 @@
     	comments: {
     		"0a272c58-b7ea-4e09-a000-7ec988248f66": {
     			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			content: "Great recipe!",
-    			recipeId: "8f414b4f-ab39-4d36-bedb-2ad69da9c830",
+    			content: "Great trade!",
+    			tradeId: "53d4dbf5-7f41-47ba-b485-43eccb91cb95",
     			_createdOn: 1614260681375,
     			_id: "0a272c58-b7ea-4e09-a000-7ec988248f66"
-    		}
+    		},
+    		"0a972c58-b7ea-4e09-a000-7ec988248f66": {
+    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+    			content: "Poor trade!",
+    			tradeId: "53d4dbf5-7f41-47ba-b485-43eccb91cb95",
+    			_createdOn: 1614260681375,
+    			_id: "0a972c58-b7ea-4e09-a000-7ec988248f66"
+    		},
+    		"0a172c58-b7ea-4e09-a000-7ec988248f66": {
+    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+    			content: "Another trade!",
+    			tradeId: "53d4dbf5-7f41-47ba-b485-43eccb91cb95",
+    			_createdOn: 1614260681375,
+    			_id: "0a172c58-b7ea-4e09-a000-7ec988248f66"
+    		},
     	},
     	records: {
     		i01: {
@@ -1591,7 +1605,7 @@
     		},
     		"52d4dbf5-7f41-47ba-b485-43eccb91cb95": {
     			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			ticker: "eur/usd",
+    			ticker: "eur/gbp",
     			date: "14.07.2024",
                 trade_direction: "Long",
     			entry: 1.10,
@@ -1606,7 +1620,7 @@
     		},
     		"50d4dbf5-7f41-47ba-b485-43eccb91cb95": {
     			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			ticker: "eur/usd",
+    			ticker: "eur/cad",
     			date: "14.07.2024",
                 trade_direction: "Long",
     			entry: 1.10,
@@ -1621,7 +1635,7 @@
     		},
     		"f5929b5c-bca4-4026-8e6e-c09e73908f77": {
     			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			ticker: "eur/usd",
+    			ticker: "eur/nzd",
     			date: "14.07.2024",
                 trade_direction: "Long",
     			entry: 1.09,
@@ -1636,7 +1650,7 @@
     		},
     		"c7f51805-242b-45ed-ae3e-80b68605141b": {
     			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			ticker: "eur/usd",
+    			ticker: "eur/try",
     			date: "14.07.2024",
                 trade_direction: "Long",
     			entry: 1.10,

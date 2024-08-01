@@ -1,0 +1,18 @@
+.comment {
+    border: 1px solid #ddd;
+    padding: 16px;
+    margin: 8px 0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.commentAuthor {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.commentText {
+    font-size: 1em;
+    color: #555;
+}

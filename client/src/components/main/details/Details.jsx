@@ -1,24 +1,11 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 import styles from './Details.module.css';
 import Spinner from '../spinner/Spinner';
+import Comment from './Comment';
 
-import * as tradeAPI from '../../../api/trades-api';
 import { useGetOneTrade } from '../../../hooks/useTrades';
 
 export default function Details() {
-    // const [trade, setTrade] = useState({});
-    // const [loading, setLoading] = useState(true);
-    // const { tradeId } = useParams();
-
-    // useEffect(() => {
-    //     (async () => {
-    //         const result = await tradeAPI.getOne(tradeId);
-    //         setTrade(result);
-    //         setLoading(false);
-    //     })();
-    // }, [tradeId]);
 
     const [trade, setTrade, loading, setLoading] = useGetOneTrade();
 
@@ -79,6 +66,20 @@ export default function Details() {
                             <button className={styles.actionButton}>Delete</button>
                         </footer>
                     </section>
+                    <section className={styles.commentsSection}>
+                    <h4>Comments</h4>
+                    <div className={styles.commentsList}>
+                        <Comment></Comment>
+                        <Comment></Comment>
+                        <Comment></Comment>
+                    </div>
+                    <div className={styles.addComment}>
+                        <textarea
+                            placeholder="Add a comment"
+                        />
+                        <button className={styles.actionButton}>Add Comment</button>
+                    </div>
+                </section>
                 </div>
             )}
         </>
