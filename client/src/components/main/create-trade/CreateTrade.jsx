@@ -7,12 +7,12 @@ export default function CreateTrade() {
             <form className={styles.form}>
                 <h2 className={styles.title}>Create Trade</h2>
                 <div className={styles.formGroup}>
-                    <label htmlFor="tradeType">Trade Type</label>
+                    <label htmlFor="ticker">Ticker</label>
                     <input
                         type="text"
-                        id="tradeType"
-                        name="tradeType"
-                        placeholder="Long EUR/USD"
+                        id="ticker"
+                        name="ticker"
+                        placeholder="EUR/USD"
                         required
                     />
                 </div>
@@ -26,22 +26,32 @@ export default function CreateTrade() {
                     />
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="entryPrice">Entry Price</label>
+                    <label htmlFor="trade_direction">Trade Direction</label>
+                    <input
+                        type="text"
+                        id="trade_direction"
+                        name="trade_direction"
+                        placeholder="trade_direction"
+                        required
+                    />
+                </div>
+                <div className={styles.formGroup}>
+                    <label htmlFor="entry">Entry Price</label>
                     <input
                         type="number"
-                        id="entryPrice"
-                        name="entryPrice"
+                        id="entry"
+                        name="entry"
                         step="0.01"
                         placeholder="1.10"
                         required
                     />
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="exitPrice">Exit Price</label>
+                    <label htmlFor="exit">Exit Price</label>
                     <input
                         type="number"
-                        id="exitPrice"
-                        name="exitPrice"
+                        id="exit"
+                        name="exit"
                         step="0.01"
                         placeholder="1.11"
                         required
@@ -58,35 +68,47 @@ export default function CreateTrade() {
                     />
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="profitLoss">Profit/Loss</label>
+                    <label htmlFor="support">Support</label>
                     <input
-                        type="number"
-                        id="profitLoss"
-                        name="profitLoss"
-                        placeholder="100"
+                        type="text"
+                        id="support"
+                        name="support"
+                        placeholder="Trend/Support lines, etc"
                         required
                     />
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="criteria">Criteria for entry</label>
-                    <textarea
-                        id="criteria"
-                        name="criteria"
-                        rows="4"
-                        placeholder="Support, MA, Price action, Oscilators"
+                    <label htmlFor="ma">Moving Averages</label>
+                    <input
+                        type="text"
+                        id="ma"
+                        name="ma"
+                        placeholder="50MA, 200MA, etc"
                         required
-                    ></textarea>
+                    />
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="comment">Comment</label>
-                    <textarea
-                        id="comment"
-                        name="comment"
-                        rows="4"
-                        placeholder="Any additional comments"
+                    <label htmlFor="price_action">Price action</label>
+                    <input
+                        type="text"
+                        id="price_action"
+                        name="price_action"
+                        placeholder="Japanese candlestick patterns"
                         required
-                    ></textarea>
+                    />
                 </div>
+                <div className={styles.formGroup}>
+                    <label htmlFor="oscilators">Oscilators</label>
+                    <input
+                        type="text"
+                        id="oscilators"
+                        name="oscilators"
+                        placeholder="oscilators"
+                        required
+                    />
+                </div>
+
+
                 <button type="submit" className={styles.button}>Create Trade</button>
             </form>
         </div>

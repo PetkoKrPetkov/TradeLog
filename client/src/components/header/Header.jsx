@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Header() {
-    const { isAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated, email } = useContext(AuthContext);
 
     return (
         <header className="header">
@@ -22,7 +22,7 @@ export default function Header() {
                                 <>
                                     <Link to="/logout">Logout</Link>
                                     <Link to="/create-trade">Create Trade</Link>
-                                    <Link to="/profile">Profile</Link>
+                                    <Link to="/profile">{email.split('@')[0]}'s Profile</Link>
                                 </>
                             )
                             : (
