@@ -45,3 +45,9 @@ export function useGetOneTrade() {
 
     return [trade, setTrade, loading, setLoading]
 }
+
+export function useCreateTrade() {
+    const tradeCreateHandler = (tradeData) => tradesAPI.create(tradeData);
+
+    return tradeCreateHandler;
+}

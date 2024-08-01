@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './CreateTrade.module.css';
 import { useForm } from '../../../hooks/useForm';
+import { useCreateTrade } from '../../../hooks/useTrades';
+import { useNavigate } from 'react-router-dom';
 
 const initialValues = {
     ticker: '',
@@ -16,10 +18,17 @@ const initialValues = {
 }
 
 export default function CreateTrade() {
-    const createHandler = (values) => {
-        console.log(values);
+    const navigate = useNavigate();
+    const createTrade = useCreateTrade();
 
-    }
+    const createHandler = async (values) => {
+        try {
+            const { _id: tradeId } = await createTrade(values);
+            navigate(`/trades/${tradeId}/details`)      
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
     const {
         values,

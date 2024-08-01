@@ -6,3 +6,4 @@ export const getAll = () => request.get(BASE_URL);
 
 export const getOne = (tradeId) => request.get(`${BASE_URL}/${tradeId}`);
 
+export const create = (tradeData) => request.post(`${BASE_URL}`, tradeData);
