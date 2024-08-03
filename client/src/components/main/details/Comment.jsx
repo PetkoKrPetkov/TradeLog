@@ -1,10 +1,10 @@
 import styles from './Comment.module.css';
 
-function Comment({ author, text }) {
+function Comment({ comment }) {
     return (
         <div className={styles.comment}>
-            <h3 className={styles.commentAuthor}>{author}</h3>
-            <p className={styles.commentText}>{text}</p>
+            <h3 className={styles.commentAuthor}>{comment._ownerId}</h3>
+            <p className={styles.commentText}>{comment.content}</p>
         </div>
     );
 }

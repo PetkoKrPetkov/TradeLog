@@ -5,7 +5,7 @@ import Comment from './Comment';
 
 import { useGetOneTrade } from '../../../hooks/useTrades';
 import { useForm } from '../../../hooks/useForm';
-import useCreateComment from '../../../hooks/useComments';
+import { useCreateComment, useGetAllComments } from '../../../hooks/useComments';
 import { useAuthContext } from '../../../contexts/AuthContext';
 
 const initialValues = {
@@ -15,7 +15,8 @@ const initialValues = {
 export default function Details() {
 
     const [trade, setTrade, loading, setLoading] = useGetOneTrade();
-
+    const [comments, setComments] = useGetAllComments(trade._id);
+    
     const { isAuthenticated } = useAuthContext();
     const createComment = useCreateComment();
     const {
@@ -87,9 +88,13 @@ export default function Details() {
                     <section className={styles.commentsSection}>
                         <h4>Comments</h4>
                         <div className={styles.commentsList}>
-                            <Comment></Comment>
-                            <Comment></Comment>
-                            <Comment></Comment>
+                            {comments.length > 0 ? (
+                                comments.map((comment) => (
+                                    <Comment key={comment._id} comment={comment} />
+                                ))
+                            ) : (
+                                <p>Write the first comment</p>
+                            )}
                         </div>
                         {isAuthenticated && (<> <label htmlFor="comment">Add a new comment</label>
                             <form className={styles.addComment} onSubmit={submitHandler}>
