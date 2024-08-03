@@ -6,7 +6,8 @@ const create = (tradeId, content) => requester.post(BASE_URL, { tradeId, content
 
 const getAll = (tradeId) => {
     const params = new URLSearchParams({
-        where: `tradeId="${tradeId}"`
+        where: `tradeId="${tradeId}"`,
+        load: `author=_ownerId:users`,
     });
 
     const commentsArr = requester.get(`${BASE_URL}?${params.toString()}`);
