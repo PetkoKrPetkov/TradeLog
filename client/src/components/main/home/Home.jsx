@@ -3,7 +3,7 @@ import Card from "../card/Card";
 import styles from './Home.module.css';
 import * as tradesAPI from '../../../api/trades-api';
 import Spinner from '../spinner/Spinner';
-import { useGetAllTrades } from '../../../hooks/useTrades';
+import { useGetAllTrades, useGetLatestTrades } from '../../../hooks/useTrades';
 
 export default function Home() {
     // const [latestTrades, setLatestTrades] = useState([])
@@ -22,9 +22,9 @@ export default function Home() {
     //     })();
     // }, []);
 
-    const [trades, setTrades, loading, setLoading] = useGetAllTrades();
+    const [trades, setTrades, loading, setLoading] = useGetLatestTrades();
 
-    const latestTrades = trades.reverse().slice(0,3);
+    const latestTrades = trades;
 
     return (
         <div>

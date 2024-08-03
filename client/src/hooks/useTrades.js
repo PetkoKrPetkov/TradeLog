@@ -24,6 +24,27 @@ export function useGetAllTrades() {
     return [trades, setTrades, loading, setLoading];
 
 }
+export function useGetLatestTrades() {
+
+    const [trades, setTrades] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const result = await tradesAPI.getLatest();
+                setTrades(result);
+            } catch (error) {
+                console.error('Error fetching trades:', error);
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, []);
+
+    return [trades, setTrades, loading, setLoading];
+
+}
 
 export function useGetOneTrade() {
     const [trade, setTrade] = useState({});
