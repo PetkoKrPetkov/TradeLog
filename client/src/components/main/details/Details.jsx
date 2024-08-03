@@ -23,9 +23,13 @@ export default function Details() {
         values,
         changeHandler,
         submitHandler,
-    } = useForm(initialValues, (values) => {
-        console.log(values.comment);
-        createComment(trade._id, values.comment);
+    } = useForm(initialValues, async (values) => {
+        try {
+           const newComment = await createComment(trade._id, values.comment);
+           setComments(oldComments => [...oldComments, newComment]);         
+        } catch (error) {
+            console.log(error.message);
+        }
     });
 
     return (
