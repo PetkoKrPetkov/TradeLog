@@ -13,7 +13,7 @@ export const AuthContext = createContext({
 export function AuthContextProvider(props) {
     const [authState, setAuthState] = usePersistedState('auth', {});
     const changeAuthState = (state) => {
-        localStorage.setItem('accessToken', state.accessToken);
+        // localStorage.setItem('accessToken', state.accessToken);
 
         setAuthState(state);
     };
