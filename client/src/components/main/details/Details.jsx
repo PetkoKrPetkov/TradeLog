@@ -17,7 +17,7 @@ export default function Details() {
     const [trade, setTrade, loading, setLoading] = useGetOneTrade();
     const [comments, setComments] = useGetAllComments(trade._id);
 
-    const { isAuthenticated, email, userId } = useAuthContext();
+    const { isAuthenticated, username, userId } = useAuthContext();
     const createComment = useCreateComment();
     const {
         values,
@@ -26,7 +26,7 @@ export default function Details() {
     } = useForm(initialValues, async (values) => {
         try {
             const newComment = await createComment(trade._id, values.comment);
-            setComments(oldComments => [...oldComments, { ...newComment, author: { email } }]);
+            setComments(oldComments => [...oldComments, { ...newComment, author: { username } }]);
         } catch (error) {
             console.log(error.message);
         }

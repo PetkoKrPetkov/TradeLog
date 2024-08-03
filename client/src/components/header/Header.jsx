@@ -4,7 +4,7 @@ import '../header/Header.css';
 import { useAuthContext } from '../../contexts/AuthContext';
 
 export default function Header() {
-    const { isAuthenticated, email } = useAuthContext();
+    const { isAuthenticated, username } = useAuthContext();
 
     return (
         <header className="header">
@@ -21,7 +21,7 @@ export default function Header() {
                                 <>
                                     <Link to="/logout">Logout</Link>
                                     <Link to="/create-trade">Create Trade</Link>
-                                    <Link to="/profile">{email.split('@')[0]}'s Profile</Link>
+                                    <Link to="/profile">{username}'s Profile</Link>
                                 </>
                             )
                             : (
