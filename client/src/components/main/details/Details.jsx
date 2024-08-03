@@ -16,8 +16,8 @@ export default function Details() {
 
     const [trade, setTrade, loading, setLoading] = useGetOneTrade();
     const [comments, setComments] = useGetAllComments(trade._id);
-    
-    const { isAuthenticated } = useAuthContext();
+
+    const { isAuthenticated, email, userId } = useAuthContext();
     const createComment = useCreateComment();
     const {
         values,
@@ -25,12 +25,14 @@ export default function Details() {
         submitHandler,
     } = useForm(initialValues, async (values) => {
         try {
-           const newComment = await createComment(trade._id, values.comment);
-           setComments(oldComments => [...oldComments, newComment]);         
+            const newComment = await createComment(trade._id, values.comment);
+            setComments(oldComments => [...oldComments, { ...newComment, author: { email } }]);
         } catch (error) {
             console.log(error.message);
         }
     });
+
+    const isOwner = userId === trade._ownerId;
 
     return (
         <>
@@ -84,10 +86,10 @@ export default function Details() {
                                 <span className={styles.value}>{trade.oscilators}</span>
                             </div>
                         </article>
-                        <footer className={styles.detailsFooter}>
+                        {isOwner && (<footer className={styles.detailsFooter}>
                             <button className={styles.actionButton}>Edit</button>
                             <button className={styles.actionButton}>Delete</button>
-                        </footer>
+                        </footer>)}
                     </section>
                     <section className={styles.commentsSection}>
                         <h4>Comments</h4>
