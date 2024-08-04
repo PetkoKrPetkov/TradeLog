@@ -47,7 +47,18 @@ export function useGetLatestTrades() {
 }
 
 export function useGetOneTrade() {
-    const [trade, setTrade] = useState({});
+    const [trade, setTrade] = useState({
+        ticker: '',
+        date: '',
+        trade_direction: '',
+        entry: '',
+        exit: '',
+        volume: '',
+        support: '',
+        ma: '',
+        price_action: '',
+        oscilators: '',
+    });
     const [loading, setLoading] = useState(true);
     const { tradeId } = useParams();
 

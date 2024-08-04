@@ -5,29 +5,29 @@ import { useGetOneTrade } from '../../../hooks/useTrades';
 import styles from './Edit.module.css';
 import { useMemo } from 'react';
 
-const initialValues = {
-    ticker: '',
-    date: '',
-    trade_direction: '',
-    entry: '',
-    exit: '',
-    volume: '',
-    support: '',
-    ma: '',
-    price_action: '',
-    oscilators: '',
-}
+// const initialValues = {
+//     ticker: '',
+//     date: '',
+//     trade_direction: '',
+//     entry: '',
+//     exit: '',
+//     volume: '',
+//     support: '',
+//     ma: '',
+//     price_action: '',
+//     oscilators: '',
+// }
 
 const Edit = () => {
     const navigate = useNavigate();
     const [trade, setTrade, loading, setLoading] = useGetOneTrade();
-    const initialFormValues = useMemo(() => Object.assign({}, initialValues, trade), [trade]);
+    // const initialFormValues = useMemo(() => Object.assign({}, initialValues, trade), [trade]);
 
     const {
         values,
         changeHandler,
         submitHandler,
-    } = useForm(initialFormValues, async (values) => {
+    } = useForm(trade, async (values) => {
         const updatedTrade = await update(trade._id, values);
         setTrade(updatedTrade);
 
