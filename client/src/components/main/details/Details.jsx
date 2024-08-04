@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import styles from './Details.module.css';
 import Spinner from '../spinner/Spinner';
@@ -42,12 +42,12 @@ export default function Details() {
                 alert('You are not the owner of this trade');
                 return;
             }
-    
+
             const isConfirmed = confirm('Are you sure you want to delete this trade?');
             if (!isConfirmed) {
                 return;
             }
-    
+
             await remove(trade._id);
             navigate('/trades');
         } catch (error) {
@@ -108,7 +108,9 @@ export default function Details() {
                             </div>
                         </article>
                         {isOwner && (<footer className={styles.detailsFooter}>
-                            <button className={styles.actionButton}>Edit</button>
+                            <Link to={`/trades/${trade._id}/edit`} className={styles.actionButton}>
+                                <button className={styles.actionButton}>Edit</button>
+                            </Link>
                             <button className={styles.actionButton} onClick={tradeDeleteHandler}>Delete</button>
                         </footer>)}
                     </section>

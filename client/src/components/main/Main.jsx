@@ -9,6 +9,7 @@ import CreateTrade from './create-trade/CreateTrade'
 import Details from './details/Details'
 import PageNotFound from './page-not-found/PageNotFound'
 import Logout from './logout/Logout'
+import Edit from './edit/Edit'
 
 
 
@@ -22,6 +23,7 @@ export default function Main() {
             <Route path='/logout' element={<Logout></Logout>}></Route>
             <Route path='/trades' element={<Trades></Trades>}></Route>
             <Route path='/trades/:tradeId/details' element={<Details></Details>}></Route>
+            <Route path='/trades/:tradeId/edit' element={<Edit></Edit>}></Route>
             <Route path='/profile' element={<Profile></Profile>}></Route>
             <Route path='/create-trade' element={<CreateTrade></CreateTrade>}></Route>
             <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
