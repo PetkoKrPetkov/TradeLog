@@ -1,7 +1,37 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { update } from '../../../api/trades-api';
+import { useForm } from '../../../hooks/useForm';
+import { useGetOneTrade } from '../../../hooks/useTrades';
 import styles from './Edit.module.css';
 
-const Edit = ({ values, changeHandler, submitHandler }) => {
+const initialValues = {
+    ticker: '',
+    date: '',
+    trade_direction: '',
+    entry: '',
+    exit: '',
+    volume: '',
+    support: '',
+    ma: '',
+    price_action: '',
+    oscilators: '',
+}
+
+const Edit = () => {
+    const navigate = useNavigate();
+    const [trade, setTrade, loading, setLoading]= useGetOneTrade();
+
+    const {
+        values,
+        changeHandler,
+        submitHandler,
+    } = useForm(Object.assign(initialValues, trade), async (values) => {
+        const updatedTrade = await update(trade._id, values);
+        setTrade(updatedTrade); 
+        
+        navigate(`/trades/${trade._id}/details`);          
+    })
+
     return (
         <div className={styles.formContainer}>
             <form className={styles.form} onSubmit={submitHandler}>
@@ -12,7 +42,7 @@ const Edit = ({ values, changeHandler, submitHandler }) => {
                         type="text"
                         id="ticker"
                         name="ticker"
-                        // value={values.ticker}
+                        value={values.ticker}
                         onChange={changeHandler}
                         placeholder="EUR/USD"
                         required
@@ -24,7 +54,7 @@ const Edit = ({ values, changeHandler, submitHandler }) => {
                         type="date"
                         id="date"
                         name="date"
-                        // value={values.date}
+                        value={values.date}
                         onChange={changeHandler}
                         required
                     />
@@ -35,7 +65,7 @@ const Edit = ({ values, changeHandler, submitHandler }) => {
                         type="text"
                         id="trade_direction"
                         name="trade_direction"
-                        // value={values.trade_direction}
+                        value={values.trade_direction}
                         onChange={changeHandler}
                         placeholder="trade_direction"
                         required
@@ -47,7 +77,7 @@ const Edit = ({ values, changeHandler, submitHandler }) => {
                         type="number"
                         id="entry"
                         name="entry"
-                        // value={values.entry}
+                        value={values.entry}
                         onChange={changeHandler}
                         step="0.01"
                         placeholder="1.10"
@@ -60,7 +90,7 @@ const Edit = ({ values, changeHandler, submitHandler }) => {
                         type="number"
                         id="exit"
                         name="exit"
-                        // value={values.exit}
+                        value={values.exit}
                         onChange={changeHandler}
                         step="0.01"
                         placeholder="1.11"
@@ -73,7 +103,7 @@ const Edit = ({ values, changeHandler, submitHandler }) => {
                         type="number"
                         id="volume"
                         name="volume"
-                        // value={values.volume}
+                        value={values.volume}
                         onChange={changeHandler}
                         placeholder="5000"
                         required
@@ -85,7 +115,7 @@ const Edit = ({ values, changeHandler, submitHandler }) => {
                         type="text"
                         id="support"
                         name="support"
-                        // value={values.support}
+                        value={values.support}
                         onChange={changeHandler}
                         placeholder="Trend/Support lines, etc"
                         required
@@ -97,7 +127,7 @@ const Edit = ({ values, changeHandler, submitHandler }) => {
                         type="text"
                         id="ma"
                         name="ma"
-                        // value={values.ma}
+                        value={values.ma}
                         onChange={changeHandler}
                         placeholder="50MA, 200MA, etc"
                         required
@@ -109,7 +139,7 @@ const Edit = ({ values, changeHandler, submitHandler }) => {
                         type="text"
                         id="price_action"
                         name="price_action"
-                        // value={values.price_action}
+                        value={values.price_action}
                         onChange={changeHandler}
                         placeholder="Japanese candlestick patterns"
                         required
@@ -121,7 +151,7 @@ const Edit = ({ values, changeHandler, submitHandler }) => {
                         type="text"
                         id="oscilators"
                         name="oscilators"
-                        // value={values.oscilators}
+                        value={values.oscilators}
                         onChange={changeHandler}
                         placeholder="oscilators"
                         required
