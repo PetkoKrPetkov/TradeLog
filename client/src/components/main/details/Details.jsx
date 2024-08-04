@@ -38,12 +38,18 @@ export default function Details() {
 
     const tradeDeleteHandler = async () => {
         try {
-            if (isOwner) {
-                await remove(trade._id);   
-                navigate('/trades');         
-            } else {
-                alert('You don`t own this trade');
+            if (!isOwner) {
+                alert('You are not the owner of this trade');
+                return;
             }
+    
+            const isConfirmed = confirm('Are you sure you want to delete this trade?');
+            if (!isConfirmed) {
+                return;
+            }
+    
+            await remove(trade._id);
+            navigate('/trades');
         } catch (error) {
             console.log(error.message);
         }
