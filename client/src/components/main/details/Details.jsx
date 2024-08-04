@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 
 import styles from './Details.module.css';
 import Spinner from '../spinner/Spinner';
@@ -7,6 +8,7 @@ import { useGetOneTrade } from '../../../hooks/useTrades';
 import { useForm } from '../../../hooks/useForm';
 import { useCreateComment, useGetAllComments } from '../../../hooks/useComments';
 import { useAuthContext } from '../../../contexts/AuthContext';
+import { remove } from '../../../api/trades-api';
 
 const initialValues = {
     comment: ''
@@ -16,8 +18,8 @@ export default function Details() {
 
     const [trade, setTrade, loading, setLoading] = useGetOneTrade();
     const [comments, setComments] = useGetAllComments(trade._id);
-
     const { isAuthenticated, username, userId } = useAuthContext();
+    const navigate = useNavigate();
     const createComment = useCreateComment();
     const {
         values,
@@ -33,6 +35,19 @@ export default function Details() {
     });
 
     const isOwner = userId === trade._ownerId;
+
+    const tradeDeleteHandler = async () => {
+        try {
+            if (isOwner) {
+                await remove(trade._id);   
+                navigate('/trades');         
+            } else {
+                alert('You don`t own this trade');
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
     return (
         <>
@@ -88,7 +103,7 @@ export default function Details() {
                         </article>
                         {isOwner && (<footer className={styles.detailsFooter}>
                             <button className={styles.actionButton}>Edit</button>
-                            <button className={styles.actionButton}>Delete</button>
+                            <button className={styles.actionButton} onClick={tradeDeleteHandler}>Delete</button>
                         </footer>)}
                     </section>
                     <section className={styles.commentsSection}>

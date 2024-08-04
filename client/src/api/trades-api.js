@@ -9,3 +9,5 @@ export const getLatest = () => request.get(`${BASE_URL}/?sortBy=_createdOn%20des
 export const getOne = (tradeId) => request.get(`${BASE_URL}/${tradeId}`);
 
 export const create = (tradeData) => request.post(`${BASE_URL}`, tradeData);
+
+export const remove = (tradeId) => request.del(`${BASE_URL}/${tradeId}`);
