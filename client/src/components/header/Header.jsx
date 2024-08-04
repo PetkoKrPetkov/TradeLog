@@ -19,8 +19,8 @@ export default function Header() {
                         isAuthenticated
                             ? (
                                 <>
-                                    <Link to="/logout">Logout</Link>
                                     <Link to="/create-trade">Create Trade</Link>
+                                    <Link to="/logout">Logout</Link>
                                     <Link to="/profile">{username}'s Profile</Link>
                                 </>
                             )
