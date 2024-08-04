@@ -5,7 +5,7 @@
 }
 
 .flex-item {
-    flex: 0 0 30%;
+    flex: 1 1 30%;
     border: 1px solid #ddd;
     padding: 1em;
     background-color: #e6f7ff;

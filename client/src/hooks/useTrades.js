@@ -6,7 +6,6 @@ export function useGetAllTrades() {
 
     const [trades, setTrades] = useState([]);
     const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(false)
 
     useEffect(() => {
         (async () => {
@@ -24,6 +23,7 @@ export function useGetAllTrades() {
     return [trades, setTrades, loading, setLoading];
 
 }
+
 export function useGetLatestTrades() {
 
     const [trades, setTrades] = useState([]);
@@ -82,4 +82,26 @@ export function useCreateTrade() {
     const tradeCreateHandler = (tradeData) => tradesAPI.create(tradeData);
 
     return tradeCreateHandler;
+}
+
+export function useGetByOwner(ownerId) {
+
+    const [trades, setTrades] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const result = await tradesAPI.getByOwner(ownerId);
+                setTrades(result);
+            } catch (error) {
+                console.error('Error fetching trades:', error);
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, [ownerId]);
+
+    return [trades, setTrades, loading, setLoading];
+
 }
