@@ -1,6 +1,6 @@
 # TradeLog
 
-TradeLog is a web application built with React that helps users track their trade logs. The application provides functionalities to add, edit, delete trade logs, and view all trades and the most recent trades. Authenticated users can also view and add comments to trades, manage their profiles.
+TradeLog is a web application built with React that helps users track their trade logs. The application provides functionalities to add, edit, delete trade logs, and view all trades and the most recent trades. Authenticated users can also view and add comments to trades, view their profiles.
 
 ## Features
 
