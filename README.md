@@ -34,7 +34,7 @@ Follow these steps to run the project locally:
     ```
 2. Navigate to the client directory:
     ```sh
-    cd TradeLog-main/client
+    cd TradeLog/client
     ```
 3. Install dependencies:
     ```sh
@@ -50,7 +50,7 @@ The application will be available at `http://localhost:2112`.
 
 1. Navigate to the server directory:
     ```sh
-    cd TradeLog-main/server-1.0.0
+    cd TradeLog/server-1.0.0
     ```
 2. Start the server:
     ```sh
