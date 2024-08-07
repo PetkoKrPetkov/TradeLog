@@ -1,26 +1,10 @@
-import { useEffect, useState } from 'react';
+
 import Card from "../card/Card";
 import styles from './Home.module.css';
-import * as tradesAPI from '../../../api/trades-api';
 import Spinner from '../spinner/Spinner';
-import { useGetAllTrades, useGetLatestTrades } from '../../../hooks/useTrades';
+import { useGetLatestTrades } from '../../../hooks/useTrades';
 
 export default function Home() {
-    // const [latestTrades, setLatestTrades] = useState([])
-    // const [loading, setLoading] = useState(true);
-
-    // useEffect(() => {
-    //     (async () => {
-    //         try {
-    //             const result = await tradesAPI.getAll();
-    //             setLatestTrades(result.reverse().slice(0, 3));
-    //         } catch (error) {
-    //             console.error('Error fetching trades:', error);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     })();
-    // }, []);
 
     const [trades, setTrades, loading, setLoading] = useGetLatestTrades();
 
