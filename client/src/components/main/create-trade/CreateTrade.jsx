@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './CreateTrade.module.css';
 import { useForm } from '../../../hooks/useForm';
+import { useValidation } from '../../../hooks/useValidation';
 import { useCreateTrade } from '../../../hooks/useTrades';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,6 +21,7 @@ const initialValues = {
 export default function CreateTrade() {
     const navigate = useNavigate();
     const createTrade = useCreateTrade();
+    const [errors, setErrors, validate] = useValidation();
 
     const createHandler = async (values) => {
         try {
@@ -34,7 +36,15 @@ export default function CreateTrade() {
         values,
         changeHandler,
         submitHandler,
-     } = useForm(initialValues, createHandler);
+     } = useForm(initialValues, async (values) => {        
+        const validationErrors = validate(values);
+        if (Object.keys(validationErrors).length === 0) {
+            await createHandler(values);
+        } else {
+            setErrors(validationErrors);
+        }
+    });
+
     return (
         <div className={styles.formContainer}>
             <form className={styles.form} onSubmit={submitHandler}>
@@ -48,8 +58,8 @@ export default function CreateTrade() {
                         value={values.ticker}
                         onChange={changeHandler}
                         placeholder="EUR/USD"
-                        required
                     />
+                    {errors.ticker && <p className={styles.error}>{errors.ticker}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="date">Date</label>
@@ -59,8 +69,8 @@ export default function CreateTrade() {
                         name="date"
                         value={values.date}
                         onChange={changeHandler}
-                        required
                     />
+                    {errors.date && <p className={styles.error}>{errors.date}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="trade_direction">Trade Direction</label>
@@ -70,9 +80,9 @@ export default function CreateTrade() {
                         name="trade_direction"
                         value={values.trade_direction}
                         onChange={changeHandler}
-                        placeholder="trade_direction"
-                        required
+                        placeholder="Short/Long"
                     />
+                    {errors.trade_direction && <p className={styles.error}>{errors.trade_direction}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="entry">Entry Price</label>
@@ -84,8 +94,8 @@ export default function CreateTrade() {
                         onChange={changeHandler}
                         step="0.01"
                         placeholder="1.10"
-                        required
                     />
+                    {errors.entry && <p className={styles.error}>{errors.entry}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="exit">Exit Price</label>
@@ -97,8 +107,8 @@ export default function CreateTrade() {
                         onChange={changeHandler}
                         step="0.01"
                         placeholder="1.11"
-                        required
                     />
+                    {errors.exit && <p className={styles.error}>{errors.exit}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="volume">Volume</label>
@@ -109,8 +119,8 @@ export default function CreateTrade() {
                         value={values.volume}
                         onChange={changeHandler}
                         placeholder="5000"
-                        required
                     />
+                    {errors.volume && <p className={styles.error}>{errors.volume}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="support">Support</label>
@@ -121,8 +131,8 @@ export default function CreateTrade() {
                         value={values.support}
                         onChange={changeHandler}
                         placeholder="Trend/Support lines, etc"
-                        required
                     />
+                    {errors.support && <p className={styles.error}>{errors.support}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="ma">Moving Averages</label>
@@ -133,8 +143,8 @@ export default function CreateTrade() {
                         value={values.ma}
                         onChange={changeHandler}
                         placeholder="50MA, 200MA, etc"
-                        required
                     />
+                    {errors.ma && <p className={styles.error}>{errors.ma}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="price_action">Price action</label>
@@ -145,8 +155,8 @@ export default function CreateTrade() {
                         value={values.price_action}
                         onChange={changeHandler}
                         placeholder="Japanese candlestick patterns"
-                        required
                     />
+                    {errors.price_action && <p className={styles.error}>{errors.price_action}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="oscilators">Oscilators</label>
@@ -157,8 +167,8 @@ export default function CreateTrade() {
                         value={values.oscilators}
                         onChange={changeHandler}
                         placeholder="oscilators"
-                        required
                     />
+                    {errors.oscilators && <p className={styles.error}>{errors.oscilators}</p>}
                 </div>
                 <button type="submit" className={styles.button}>Create Trade</button>
             </form>

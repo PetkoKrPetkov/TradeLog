@@ -32,15 +32,6 @@ export default function Card({
                     <p>Exit price: {exit}</p>
                     <p>Volume: {volume}$</p>
                 </article>
-                {/* <article className={styles.article}>
-                    <header>
-                        <h5>Criteria for entry</h5>
-                    </header>
-                    <p>Support: {support}</p>
-                    <p>MA: {ma}</p>
-                    <p>Price action: {price_action}</p>
-                    <p>Oscilators: {oscilators}</p>
-                </article> */}
                 <footer className={styles.footer}>
                     <Link to={`/trades/${_id}/details`} className={styles.detailsLink}>Details</Link>
                 </footer>

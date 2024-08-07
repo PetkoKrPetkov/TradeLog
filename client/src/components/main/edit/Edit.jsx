@@ -2,36 +2,38 @@ import { useNavigate } from 'react-router-dom';
 import { update } from '../../../api/trades-api';
 import { useForm } from '../../../hooks/useForm';
 import { useGetOneTrade } from '../../../hooks/useTrades';
+import { useValidation } from '../../../hooks/useValidation';
 import styles from './Edit.module.css';
-import { useMemo } from 'react';
-
-// const initialValues = {
-//     ticker: '',
-//     date: '',
-//     trade_direction: '',
-//     entry: '',
-//     exit: '',
-//     volume: '',
-//     support: '',
-//     ma: '',
-//     price_action: '',
-//     oscilators: '',
-// }
 
 const Edit = () => {
     const navigate = useNavigate();
     const [trade, setTrade, loading, setLoading] = useGetOneTrade();
-    // const initialFormValues = useMemo(() => Object.assign({}, initialValues, trade), [trade]);
+    const [errors, setErrors, validate] = useValidation();
+
+    const updateHandler = async (id, values) => {
+        try {   
+            const updatedTrade = await update(id, values);
+            setTrade(updatedTrade);
+
+            navigate(`/trades/${trade._id}/details`);  
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
 
     const {
         values,
         changeHandler,
         submitHandler,
     } = useForm(trade, async (values) => {
-        const updatedTrade = await update(trade._id, values);
-        setTrade(updatedTrade);
-
-        navigate(`/trades/${trade._id}/details`);
+        const validationErrors = validate(values);
+        if (Object.keys(validationErrors).length === 0) {
+            updateHandler(trade._id, values);
+        } else {
+            setErrors(validationErrors);
+        }
+        
     })
 
     return (
@@ -47,8 +49,9 @@ const Edit = () => {
                         value={values.ticker}
                         onChange={changeHandler}
                         placeholder="EUR/USD"
-                        required
+                        
                     />
+                    {errors.ticker && <p className={styles.error}>{errors.ticker}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="date">Date</label>
@@ -58,8 +61,9 @@ const Edit = () => {
                         name="date"
                         value={values.date}
                         onChange={changeHandler}
-                        required
+                        
                     />
+                    {errors.date && <p className={styles.error}>{errors.date}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="trade_direction">Trade Direction</label>
@@ -69,9 +73,10 @@ const Edit = () => {
                         name="trade_direction"
                         value={values.trade_direction}
                         onChange={changeHandler}
-                        placeholder="trade_direction"
-                        required
+                        placeholder="Short/Long"
+                        
                     />
+                    {errors.trade_direction && <p className={styles.error}>{errors.trade_direction}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="entry">Entry Price</label>
@@ -83,8 +88,9 @@ const Edit = () => {
                         onChange={changeHandler}
                         step="0.01"
                         placeholder="1.10"
-                        required
+                        
                     />
+                    {errors.entry && <p className={styles.error}>{errors.entry}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="exit">Exit Price</label>
@@ -96,8 +102,9 @@ const Edit = () => {
                         onChange={changeHandler}
                         step="0.01"
                         placeholder="1.11"
-                        required
+                        
                     />
+                    {errors.exit && <p className={styles.error}>{errors.exit}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="volume">Volume</label>
@@ -108,8 +115,9 @@ const Edit = () => {
                         value={values.volume}
                         onChange={changeHandler}
                         placeholder="5000"
-                        required
+                        
                     />
+                    {errors.volume && <p className={styles.error}>{errors.volume}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="support">Support</label>
@@ -120,8 +128,9 @@ const Edit = () => {
                         value={values.support}
                         onChange={changeHandler}
                         placeholder="Trend/Support lines, etc"
-                        required
+                        
                     />
+                    {errors.support && <p className={styles.error}>{errors.support}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="ma">Moving Averages</label>
@@ -132,8 +141,9 @@ const Edit = () => {
                         value={values.ma}
                         onChange={changeHandler}
                         placeholder="50MA, 200MA, etc"
-                        required
+                        
                     />
+                     {errors.ma && <p className={styles.error}>{errors.ma}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="price_action">Price action</label>
@@ -144,8 +154,8 @@ const Edit = () => {
                         value={values.price_action}
                         onChange={changeHandler}
                         placeholder="Japanese candlestick patterns"
-                        required
                     />
+                    {errors.price_action && <p className={styles.error}>{errors.price_action}</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label htmlFor="oscilators">Oscilators</label>
@@ -156,8 +166,8 @@ const Edit = () => {
                         value={values.oscilators}
                         onChange={changeHandler}
                         placeholder="oscilators"
-                        required
                     />
+                    {errors.oscilators && <p className={styles.error}>{errors.oscilators}</p>}
                 </div>
                 <button type="submit" className={styles.button}>Save Changes</button>
             </form>
