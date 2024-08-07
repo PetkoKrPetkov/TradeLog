@@ -9,6 +9,8 @@ import { useForm } from '../../../hooks/useForm';
 import { useCreateComment, useGetAllComments } from '../../../hooks/useComments';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { remove } from '../../../api/trades-api';
+import ConfirmModal from '../../common/confirmModal/ConfirmModal';
+import { useConfirm } from '../../../hooks/useConfirm';
 
 const initialValues = {
     comment: ''
@@ -19,8 +21,11 @@ export default function Details() {
     const [trade, setTrade, loading, setLoading] = useGetOneTrade();
     const [comments, setComments] = useGetAllComments(trade._id);
     const { isAuthenticated, username, userId } = useAuthContext();
+    const [showModal, setShowModal, cancel] = useConfirm();
+
     const navigate = useNavigate();
     const createComment = useCreateComment();
+
     const {
         values,
         changeHandler,
@@ -40,11 +45,6 @@ export default function Details() {
         try {
             if (!isOwner) {
                 alert('You are not the owner of this trade');
-                return;
-            }
-
-            const isConfirmed = confirm('Are you sure you want to delete this trade?');
-            if (!isConfirmed) {
                 return;
             }
 
@@ -111,7 +111,7 @@ export default function Details() {
                             <Link to={`/trades/${trade._id}/edit`} className={styles.actionButton}>
                                 <button className={styles.actionButton}>Edit</button>
                             </Link>
-                            <button className={styles.actionButton} onClick={tradeDeleteHandler}>Delete</button>
+                            <button className={styles.actionButton} onClick={() => setShowModal(true)}>Delete</button>
                         </footer>)}
                     </section>
                     <section className={styles.commentsSection}>
@@ -136,6 +136,14 @@ export default function Details() {
                                 <button className={styles.actionButton}>Add Comment</button>
                             </form> </>)}
                     </section>
+                    {showModal && (
+                        <ConfirmModal 
+                         title='Delete trade details'
+                         message='Are you sure you want to delete this trade?'
+                         onClose={cancel}
+                         onConfirm={tradeDeleteHandler}                       
+                        />
+                        )}
                 </div>
             )}
         </>
