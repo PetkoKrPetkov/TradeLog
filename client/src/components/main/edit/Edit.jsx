@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { update } from '../../../api/trades-api';
 import { useForm } from '../../../hooks/useForm';
@@ -47,7 +47,12 @@ const Edit = () => {
         };
     }
 
-    const { values, changeHandler, submitHandler } = useForm(trade, async (values) => {
+    const formInitial = useMemo(() => ({
+        ...trade,
+        tags: Array.isArray(trade.tags) ? trade.tags.join(', ') : (trade.tags ?? ''),
+    }), [trade]);
+
+    const { values, changeHandler, submitHandler } = useForm(formInitial, async (values) => {
         const normalized = normalize(values);
         const result = tradeSchema.safeParse(normalized);
         if (!result.success) {
@@ -260,6 +265,7 @@ const Edit = () => {
                             onChange={changeHandler}
                             placeholder="comma separated, e.g. EURUSD, news, breakout"
                         />
+                        {errors.tags && <p className={styles.error}>{errors.tags}</p>}
                     </div>
                 </div>
 
