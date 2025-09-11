@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { update } from '../../../api/trades-api';
 import { useForm } from '../../../hooks/useForm';
 import { useGetOneTrade } from '../../../hooks/useTrades';
@@ -10,18 +10,19 @@ import PageHeader from '../../common/page-header/PageHeader';
 
 const Edit = () => {
     const navigate = useNavigate();
+    const { tradeId } = useParams();
     const [trade, setTrade, loading, setLoading] = useGetOneTrade();
     const [errors, setErrors] = useState({});
     const [submitting, setSubmitting] = useState(false);
     const { addToast } = useToast();
 
-    const updateHandler = async (id, values) => {
+    const updateHandler = async (values) => {
         try {   
             setSubmitting(true);
-            const updatedTrade = await update(id, values);
+            const updatedTrade = await update(tradeId, values);
             setTrade(updatedTrade);
             addToast('success', 'Trade updated');
-            navigate(`/trades/${trade._id}/details`);  
+            navigate(`/trades/${tradeId}/details`);  
         } catch (error) {
             addToast('error', error?.message || 'Update failed');
             console.log(error.message);
@@ -63,7 +64,7 @@ const Edit = () => {
             ...result.data,
             tags: result.data.tags ? String(result.data.tags).split(',').map(s => s.trim()).filter(Boolean) : (Array.isArray(result.data.tags) ? result.data.tags : []),
         };
-        await updateHandler(trade._id, payload);
+        await updateHandler(payload);
     }, { resetOnSubmit: false })
 
     return (
