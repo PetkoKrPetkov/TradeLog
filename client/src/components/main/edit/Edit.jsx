@@ -70,7 +70,7 @@ const Edit = () => {
     return (
         <div className={styles.formContainer}>
             <PageHeader title="Edit Trade" breadcrumbs={[{label:'Home', to:'/'},{label:'Trades', to:'/trades'},{label:`${trade.ticker || ''}`},{label:'Edit'}]} />
-            <form className={styles.form} onSubmit={submitHandler}>
+            <form className={styles.form} onSubmit={submitHandler} noValidate>
                 <header className={styles.header}>
                     <h2 className={styles.title}>Edit Trade</h2>
                     <p className={styles.subtitle}>Update key details and save changes</p>
