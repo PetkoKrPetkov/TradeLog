@@ -46,17 +46,40 @@ Follow these steps to run the project locally:
     ```
 The application will be available at `http://localhost:2112`.
 
-### Server
+### Server (server-2: Express + Prisma)
 
-1. Navigate to the server directory:
+1. Navigate to the server-2 directory:
     ```sh
-    cd TradeLog/server-1.0.0
+    cd TradeLog/server-2
     ```
-2. Start the server:
+2. Install dependencies:
     ```sh
-    node ./server.js
+    npm install
     ```
-Note: This server is a SoftUni Practice-Server and does not persist data. All data will be lost upon server restart.
+3. Configure environment (a dev `.env` is provided):
+    - `DATABASE_URL` (SQLite): `file:./prisma/dev.db`
+    - `JWT_SECRET`: `devsecret`
+    - `CLIENT_ORIGIN`: `http://localhost:5173,http://localhost:3000`
+4. Start the API:
+    ```sh
+    npm run dev
+    # or
+    npm start
+    ```
+API runs on `http://localhost:3030`.
+
+Legacy server (server-1.0.0) is kept for reference but is not used by the React app anymore.
+
+### Client API URL
+
+The client can target any API base by setting `VITE_API_URL`:
+
+```sh
+cd TradeLog/client
+echo VITE_API_URL=http://localhost:3030 > .env
+```
+
+If not set, it defaults to `http://localhost:3030` via `src/config.js`.
 
 ## Technologies Used
 

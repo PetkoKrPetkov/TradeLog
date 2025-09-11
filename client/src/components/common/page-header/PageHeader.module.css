@@ -1,0 +1,6 @@
+.wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.title { font-family: 'Montserrat', sans-serif; font-size: 1.6rem; color: var(--text); }
+.crumbs { display: flex; gap: 0.35rem; align-items: center; color: var(--muted); font-size: 0.95rem; }
+.crumbLink { color: var(--primary); text-decoration: none; }
+.sep { color: var(--border); }
+.right { display: flex; gap: 0.5rem; }

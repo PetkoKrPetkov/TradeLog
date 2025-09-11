@@ -8,13 +8,10 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    color: #333;
-}
+.headerRow { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; }
+.avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; }
+.title { font-family: 'Montserrat', sans-serif; font-size: 2rem; color: var(--text); }
+.subtitle { color: var(--muted); }
 
 .profileInfo {
     display: flex;
@@ -70,9 +67,50 @@
     border: 1px solid #ddd;
 }
 
+.tableWrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow-s); }
+.table { width: 100%; border-collapse: collapse; min-width: 720px; }
+.table thead th { position: sticky; top: 0; background: var(--surface); text-align: left; font-weight: 600; color: var(--text); border-bottom: 1px solid var(--border); padding: 0.6rem 0.75rem; }
+.table tbody td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border); color: var(--muted); }
+.table tbody tr:hover { background: rgba(0,0,0,0.02); }
+.table tbody tr:nth-child(even) { background: rgba(0,0,0,0.015); }
+.actionsCell { white-space: nowrap; }
+.smallLink { margin-right: 0.5rem; color: var(--primary); text-decoration: none; }
+.smallLink:hover { text-decoration: underline; }
+
+.badge { display: inline-block; padding: 0.1rem 0.45rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+.badgeLong { background: rgba(34,197,94,0.15); color: #16a34a; }
+.badgeShort { background: rgba(239,68,68,0.15); color: #dc2626; }
+.badgeOther { background: rgba(107,114,128,0.15); color: #6b7280; }
+
 .noTrades {
     font-size: 1.2rem;
     color: #777;
     text-align: center;
     width: 100%;
 }
+
+.actionButton {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.5rem 0.9rem;
+    background: #2563eb;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.statsBar { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 0.75rem; margin-bottom: 1rem; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.75rem; text-align: center; box-shadow: var(--shadow-s); }
+.statNumber { display: block; font-weight: 700; font-size: 1.2rem; color: var(--text); }
+.statLabel { display: block; font-size: 0.85rem; color: var(--muted); }
+
+.controls { display: flex; gap: 1rem; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.chips { display: flex; gap: 0.4rem; }
+.chip { border: 1px solid var(--border); padding: 0.3rem 0.6rem; border-radius: 999px; cursor: pointer; background: var(--surface); }
+.chipActive { border-color: var(--primary); color: var(--primary); }
+.filtersRight { display: flex; gap: 0.4rem; align-items: center; }
+.tagInput { border: 1px solid var(--border); border-radius: 8px; padding: 0.45rem 0.6rem; }
+.sortSelect { border: 1px solid var(--border); border-radius: 8px; padding: 0.45rem 0.6rem; background: var(--surface); }
+.numRight { text-align: right; color: var(--text); }
+.ticker { text-transform: uppercase; letter-spacing: 0.02em; color: var(--text); font-weight: 600; }
+.tagsCell { max-width: 260px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

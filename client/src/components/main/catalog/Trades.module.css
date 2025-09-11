@@ -1,15 +1,26 @@
 .flex-container {
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 2em;
-    justify-content: center;
-    padding: 2em;
-    background-color: #f0f2f5;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
+    justify-items: stretch;
+    padding: 1.25rem;
+    background-color: transparent;
 }
 
-.h2 {
-    color: #333; 
-    margin-bottom: 1em; 
-    text-align: center;
+.h2 { color: var(--text); margin-bottom: var(--space-4); text-align: center; }
+
+.filters { display: flex; gap: var(--space-2); justify-content: center; align-items: center; margin-bottom: var(--space-4); }
+.chip { border: 1px solid var(--border); padding: 0.3rem 0.6rem; border-radius: 999px; cursor: pointer; background: var(--surface); }
+.chipActive { border-color: var(--primary); color: var(--primary); }
+.tagInput { border: 1px solid var(--border); border-radius: 8px; padding: 0.45rem 0.6rem; }
+
+.cta-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
 }

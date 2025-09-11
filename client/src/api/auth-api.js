@@ -1,9 +1,10 @@
 import * as requester from './requester';
+import { API_URL } from '../config';
 
-const BASE_URL = 'http://localhost:3030/users';
+const BASE_URL = `${API_URL}/users`;
 
-export const login = (email, password) => requester.post(`${BASE_URL}/login`, { email, password });
+export const login = (email, password, options) => requester.post(`${BASE_URL}/login`, { email, password }, options);
 
-export const register = (email, password, username) => requester.post(`${BASE_URL}/register`, { email, password, username });
+export const register = (email, password, username, options) => requester.post(`${BASE_URL}/register`, { email, password, username }, options);
 
-export const logout = () => requester.get(`${BASE_URL}/logout`);
+export const logout = (options) => requester.get(`${BASE_URL}/logout`, options);

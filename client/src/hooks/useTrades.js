@@ -8,16 +8,20 @@ export function useGetAllTrades() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const controller = new AbortController();
         (async () => {
             try {
-                const result = await tradesAPI.getAll();
+                const result = await tradesAPI.getAll({ signal: controller.signal });
                 setTrades(result);
             } catch (error) {
-                console.error('Error fetching trades:', error);
+                if (error?.name !== 'AbortError') {
+                    console.error('Error fetching trades:', error);
+                }
             } finally {
                 setLoading(false);
             }
         })();
+        return () => controller.abort();
     }, []);
 
     return [trades, setTrades, loading, setLoading];
@@ -30,16 +34,25 @@ export function useGetLatestTrades() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const controller = new AbortController();
         (async () => {
             try {
-                const result = await tradesAPI.getLatest();
-                setTrades(result);
+                if (tradesAPI.getPaged) {
+                    const result = await tradesAPI.getPaged({ offset: 0, pageSize: 6, sortBy: '_createdOn desc' }, { signal: controller.signal });
+                    setTrades(result);
+                } else {
+                    const result = await tradesAPI.getLatest({ signal: controller.signal });
+                    setTrades(result);
+                }
             } catch (error) {
-                console.error('Error fetching trades:', error);
+                if (error?.name !== 'AbortError') {
+                    console.error('Error fetching trades:', error);
+                }
             } finally {
                 setLoading(false);
             }
         })();
+        return () => controller.abort();
     }, []);
 
     return [trades, setTrades, loading, setLoading];
@@ -63,16 +76,20 @@ export function useGetOneTrade() {
     const { tradeId } = useParams();
 
     useEffect(() => {
+        const controller = new AbortController();
         (async () => {
             try {
-                const result = await tradesAPI.getOne(tradeId);
+                const result = await tradesAPI.getOne(tradeId, { signal: controller.signal });
                 setTrade(result);
             } catch (error) {
-                console.error('Error fetching trades:', error);
+                if (error?.name !== 'AbortError') {
+                    console.error('Error fetching trades:', error);
+                }
             } finally {
                 setLoading(false);
             }
         })();
+        return () => controller.abort();
     }, [tradeId]);
 
     return [trade, setTrade, loading, setLoading]
@@ -90,16 +107,20 @@ export function useGetByOwner(ownerId) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const controller = new AbortController();
         (async () => {
             try {
-                const result = await tradesAPI.getByOwner(ownerId);
+                const result = await tradesAPI.getByOwner(ownerId, { signal: controller.signal });
                 setTrades(result);
             } catch (error) {
-                console.error('Error fetching trades:', error);
+                if (error?.name !== 'AbortError') {
+                    console.error('Error fetching trades:', error);
+                }
             } finally {
                 setLoading(false);
             }
         })();
+        return () => controller.abort();
     }, [ownerId]);
 
     return [trades, setTrades, loading, setLoading];

@@ -1,0 +1,83 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" // за лесен старт; по-късно можем Postgres
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  username  String
+  password  String
+  createdAt DateTime @default(now())
+
+  trades   Trade[]
+  comments Comment[]
+  attachments Attachment[]
+}
+
+model Trade {
+  id String @id @default(cuid())
+
+  // БЕЗ подчертавка в името на полето, но мапваме към "_ownerId" в БД
+  ownerId String @map("_ownerId")
+  user    User   @relation(fields: [ownerId], references: [id])
+
+  // полетата по UI
+  ticker          String
+  date            String // пазим като String, за да не чупим UI
+  trade_direction String
+  entry           Float
+  exit            Float
+  volume          Int
+  support         String?
+  ma              String?
+  price_action    String?
+  oscilators      String?
+  strategy        String?
+  // SQLite не поддържа Json -> пазим CSV низ
+  tags            String?
+
+  // Същото: името в модела е createdOn, в БД е "_createdOn"
+  createdOn Int @default(0) @map("_createdOn")
+
+  comments Comment[]
+  attachments Attachment[]
+}
+
+model Comment {
+  id String @id @default(cuid())
+
+  tradeId String
+  trade   Trade  @relation(fields: [tradeId], references: [id], onDelete: Cascade)
+
+  // пак без подчертавка, но мапнато към "_ownerId"
+  ownerId String @map("_ownerId")
+  author  User   @relation(fields: [ownerId], references: [id])
+
+  content String
+
+  createdOn Int @default(0) @map("_createdOn")
+}
+
+model Attachment {
+  id String @id @default(cuid())
+
+  tradeId String
+  trade   Trade  @relation(fields: [tradeId], references: [id], onDelete: Cascade)
+
+  ownerId String @map("_ownerId")
+  author  User   @relation(fields: [ownerId], references: [id])
+
+  filename String
+  mime     String
+  size     Int
+  url      String
+
+  createdOn Int @default(0) @map("_createdOn")
+}

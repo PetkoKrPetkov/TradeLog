@@ -1,16 +1,46 @@
 /* Home.module.css */
 .flex-container {
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 2em;
-    justify-content: center;
-    padding: 2em;
-    background-color: #f0f2f5;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
+    justify-items: stretch;
+    padding: 1.25rem;
+    background-color: transparent;
 }
 
-.h2 {
-    color: #333; 
-    margin-bottom: 1em; 
-    text-align: center;
+.h2 { color: var(--text); margin: 0; }
+.toolbar { display: flex; justify-content: space-between; align-items: center; padding: 0 1.25rem; }
+.searchWrap { display: flex; gap: 0.5rem; }
+.search { border: 1px solid var(--border); border-radius: 8px; padding: 0.45rem 0.6rem; }
+.select { border: 1px solid var(--border); border-radius: 8px; padding: 0.45rem 0.6rem; }
+
+/* Make a section span the full viewport width, ignoring #root max-width */
+.fullBleed {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
 }
+.chartContainer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-m);
+    padding: 0.5rem;
+}
+.settings { display:flex; gap: 0.5rem; align-items:center; padding: 0 1.25rem; margin-bottom: 0.5rem; }
+.switch { display:flex; gap:0.25rem; align-items:center; }
+
+.marketGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; padding: 0 1.25rem; }
+.marketCard { border: 1px solid var(--border); background: var(--surface); border-radius: 10px; padding: 0.6rem 0.75rem; box-shadow: var(--shadow-s); }
+.mHeader { display: flex; gap: 0.5rem; align-items: baseline; margin-bottom: 0.25rem; }
+.mSymbol { font-weight: 700; color: var(--text); }
+.mName { color: var(--muted); font-size: 0.9rem; }
+.mRow { display: flex; gap: 0.5rem; align-items: baseline; }
+.mPrice { font-weight: 700; }
+.mChange { font-size: 0.9rem; }
+.mUp { color: #16a34a; }
+.mDown { color: #dc2626; }

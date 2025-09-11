@@ -1,32 +1,20 @@
 .site {
-  border: 2px solid #fff;
-  background-color: #f0f2f5;
-  padding: 1em;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 2em;
+  gap: 1.5rem;
   min-height: 100vh;
 }
 
-.site > * {
-  border: 2px solid #fff;
-  padding: 2em;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.site > main {
+.content {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0.75rem 0;
   flex-grow: 1;
 }
 
 @media (max-width: 768px) {
-  .site {
-      padding: 0.5em;
-      gap: 1em;
-  }
-
-  .site > * {
-      padding: 1em;
-  }
+  .site { padding: 0.75rem; gap: 1rem; }
+  .content { padding: 1rem; }
 }

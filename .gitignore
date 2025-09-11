@@ -1,0 +1,39 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+dist/
+build/
+client/dist/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs & coverage
+logs/
+*.log
+coverage/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Database (Prisma dev db)
+server-2/prisma/*.db
+
+# Uploads (runtime)
+server-2/uploads/
+
+# Vite cache (sometimes outside node_modules)
+client/.vite
+

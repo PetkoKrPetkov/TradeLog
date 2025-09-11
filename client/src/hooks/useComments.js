@@ -11,11 +11,19 @@ export function useGetAllComments(tradeId) {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
+        const controller = new AbortController();
         (async () => {
-            const result = await commentsAPI.getAll(tradeId);
-
-            setComments(result);
+            try {
+                const result = await commentsAPI.getAll(tradeId, { signal: controller.signal });
+                setComments(result);
+            } catch (error) {
+                if (error?.name !== 'AbortError') {
+                    console.error('Error fetching comments:', error);
+                    setComments([]);
+                }
+            }
         })();
+        return () => controller.abort();
     }, [tradeId]);
 
     return [comments, setComments];

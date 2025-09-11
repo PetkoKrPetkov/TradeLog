@@ -5,13 +5,13 @@
 }
 
 .flex-item {
-    flex: 1 1 30%;
-    border: 1px solid #ddd;
+    flex: 1 1 260px;
+    border: 1px solid var(--border);
     padding: 1em;
-    background-color: #e6f7ff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    background-color: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-m);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .flex-item:hover {
@@ -22,15 +22,15 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
-    background-color: #f9f9f9;
-    border-radius: 8px;
+    background-color: var(--surface);
+    border-radius: var(--radius);
     padding: 1em;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-s);
     transition: background-color 0.3s;
 }
 
 .card-container:hover {
-    background-color: #f1f1f1;
+    background-color: #fafafa;
 }
 
 .card-container header,
@@ -44,11 +44,22 @@
     color: #333;
 }
 
+.badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.badgeLong { background: rgba(34,197,94,0.15); color: #16a34a; }
+.badgeShort { background: rgba(239,68,68,0.15); color: #dc2626; }
+.badgeOther { background: rgba(107,114,128,0.15); color: #6b7280; }
+
 .card-container .article {
     padding: 1em;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-s);
 }
 
 .card-container article header {
@@ -72,16 +83,16 @@
     padding: 0.5em 1em;
     font-size: 1em;
     font-weight: bold;
-    color: white;
-    background-color: #007bff;
+    color: #fff;
+    background-color: var(--primary);
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     text-decoration: none;
     transition: background-color 0.3s, transform 0.2s;
 }
 
 .detailsLink:hover {
-    background-color: #0056b3;
+    background-color: var(--primary-hover);
     transform: scale(1.05);
 }
 

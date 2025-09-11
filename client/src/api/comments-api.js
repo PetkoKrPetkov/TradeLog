@@ -1,16 +1,17 @@
 import * as requester from './requester'
+import { API_URL } from '../config';
 
-const BASE_URL = 'http://localhost:3030/data/comments';
+const BASE_URL = `${API_URL}/data/comments`;
 
-const create = (tradeId, content) => requester.post(BASE_URL, { tradeId, content});
+const create = (tradeId, content, options) => requester.post(BASE_URL, { tradeId, content }, options);
 
-const getAll = (tradeId) => {
+const getAll = (tradeId, options) => {
     const params = new URLSearchParams({
-        where: `tradeId="${tradeId}"`,
+        where: `tradeId=\"${tradeId}\"`,
         load: `author=_ownerId:users`,
     });
 
-    const commentsArr = requester.get(`${BASE_URL}?${params.toString()}`);
+    const commentsArr = requester.get(`${BASE_URL}?${params.toString()}`, options);
     return commentsArr;
 }
 
@@ -20,3 +21,4 @@ const commentsAPI = {
 }
 
 export default commentsAPI;
+

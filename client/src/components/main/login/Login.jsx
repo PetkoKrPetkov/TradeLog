@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../../../hooks/useAuth';
 import styles from '../register/Register.module.css';
+import ErrorBanner from '../../common/error/ErrorBanner.jsx';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -30,7 +31,7 @@ export default function Login() {
             <form className={styles.form} onSubmit={loginHandler}>
                 <h2 className={styles.title}>Login</h2>
 
-                {error && <div className={styles.error}>{error}</div>} 
+                {error && <ErrorBanner>{error}</ErrorBanner>} 
 
                 <div className={styles.formGroup}>
                     <label htmlFor="email">Email</label>

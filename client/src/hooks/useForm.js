@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useForm(initialValues, submitCallback) {
+export function useForm(initialValues, submitCallback, config = { resetOnSubmit: true }) {
     const [values, setValues] = useState(initialValues);
 
     useEffect(() => {
@@ -17,8 +17,9 @@ export function useForm(initialValues, submitCallback) {
     const submitHandler = async (e) => {
         e.preventDefault();
         await submitCallback(values);
-        
-        setValues(initialValues)
+        if (config?.resetOnSubmit) {
+            setValues(initialValues)
+        }
     };
 
     return{
