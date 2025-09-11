@@ -13,10 +13,14 @@ const router = Router();
 router.get('/', asyncHandler(async (req, res) => {
   const { where, sortBy, pageSize, offset, skip } = req.query || {};
 
-  // Default sorting: createdOn desc
-  const desc = typeof sortBy === 'string' ? /_createdOn\s+desc/i.test(sortBy) : true;
-  const limit = pageSize ? Number(pageSize) : undefined;
-  const _skip = (offset ?? skip) ? Number(offset ?? skip) : undefined;
+  // Default sorting: createdOn desc (accept both space and '+' separators)
+  let desc = true;
+  if (typeof sortBy === 'string') {
+    const s = decodeURIComponent(String(sortBy)).replace(/\+/g, ' ');
+    desc = /_createdOn\s+desc/i.test(s);
+  }
+  const limit = pageSize !== undefined ? Number(pageSize) : undefined;
+  const _skip = (offset !== undefined ? Number(offset) : (skip !== undefined ? Number(skip) : undefined));
 
   // Optional owner filter (where=_ownerId="id")
   let ownerId;
