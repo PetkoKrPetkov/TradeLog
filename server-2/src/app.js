@@ -11,9 +11,12 @@ import { auth } from './middleware/auth.js';
 
 const app = express();
 
-const origins = (process.env.CLIENT_ORIGIN || '').split(',').filter(Boolean);
+// CORS: allow all in dev if ALLOW_ALL_ORIGINS=true, else use CLIENT_ORIGIN list or allow all if empty
+const origins = (process.env.CLIENT_ORIGIN || '').split(',').map(s => s.trim()).filter(Boolean);
+const allowAll = String(process.env.ALLOW_ALL_ORIGINS || '').toLowerCase() === 'true';
+const originConfig = allowAll ? true : (origins.length ? origins : true);
 app.use(cors({
-  origin: origins.length ? origins : true,
+  origin: originConfig,
   allowedHeaders: ['Content-Type', 'X-Authorization'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   optionsSuccessStatus: 204,
