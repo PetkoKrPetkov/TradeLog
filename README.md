@@ -1,67 +1,85 @@
 # TradeLog
 
-TradeLog is a web application built with React that helps users track their trade logs. The application provides functionalities to add, edit, delete trade logs, and view all trades and the most recent trades. Authenticated users can also view and add comments to trades, view their profiles.
+TradeLog is a full-stack MERN application for tracking trades, notes, and threaded comments. These steps explain how to launch the app locally from the checked-in structure (`TradeLogFinal/TradeLog`).
 
-## Features
+## Project structure
+```
+TradeLogFinal/
+    TradeLog/
+        client/
+        server/
+```
 
-### Public Features
+All commands below assume you start in `TradeLogFinal/TradeLog`.
 
-- **User Registration and Login**: Users can register and log into the system.
-- **View Trade Logs**: View a list of all trade logs.
-- **View Comments on Trades**: Non-logged-in users can only view comments.
+## Prerequisites
+- Node.js 18+ (developed with v20.11.0)
+- npm (ships with Node.js)
+- MongoDB 6+ running locally or a MongoDB Atlas connection
 
-### Private Features (Authenticated Users Only)
+## 1. Clone the repository
+```bash
+git clone <your-fork-or-repo-url>
+cd TradeLogFinal/TradeLog
+```
 
-- **Add Trade Log**: Allows authenticated users to add a new trade log with details such as date, ticker, volume, and price.
-- **Edit Trade Log**: Authenticated users can edit their existing trade logs.
-- **Delete Trade Log**: Allows authenticated users to delete unwanted trade logs.
-- **Add Comments on Trades**: Logged-in users can add comments to trades.
-- **User Profile**: Displays Username, email and all trades made by the user.
+If you already have the project locally, change into the same directory (`TradeLogFinal/TradeLog`).
 
-### Auth Guards
+## 2. Install dependencies
+Install packages for the backend and frontend separately:
+```bash
+cd server
+npm install
+cd ../client
+npm install
+```
 
-- Guards to manage authenticated and unauthenticated user access.
+## 3. Configure environment variables
+1. Navigate to `TradeLogFinal/TradeLog/server`.
+2. Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+3. Update the values in `.env`:
+   - `PORT`: API port (default `3030`).
+   - `MONGODB_URI`: Mongo connection string (e.g., `mongodb://127.0.0.1:27017/tradelog`).
+   - `JWT_SECRET`: long random string used to sign JWTs.
+   - `CORS_ORIGIN`: frontend URL that is allowed to call the API (default `http://localhost:5173`).
 
-## Installation
+> **Important:** keep `.env` out of version control. Only commit `.env.example`.
 
-Follow these steps to run the project locally:
+## 4. Start the backend
+```bash
+cd TradeLogFinal/TradeLog/server
+npm run dev
+```
+- Connects to MongoDB and listens on `http://localhost:3030`.
+- Use `npm run start` when running in production.
 
-### Client
+## 5. Start the frontend
+Open a new terminal:
+```bash
+cd TradeLogFinal/TradeLog/client
+npm run dev
+```
+- Vite serves the client on `http://localhost:5173`.
+- API calls use the URLs in `client/src/api` (pointing to `http://localhost:3030`).
 
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/PetkoKrPetkov/TradeLog.git
-    ```
-2. Navigate to the client directory:
-    ```sh
-    cd TradeLog/client
-    ```
-3. Install dependencies:
-    ```sh
-    npm install
-    ```
-4. Start the client application:
-    ```sh
-    npm run dev
-    ```
-The application will be available at `http://localhost:2112`.
+## 6. Open the app
+Browse to `http://localhost:5173`. Register, create trades, and add comments. The client authenticates and persists data through the API at `http://localhost:3030`.
 
-### Server
+## Useful scripts
+### Server (`TradeLogFinal/TradeLog/server`)
+- `npm run dev`: start the Express API with nodemon (auto-reload on save).
+- `npm run start`: start the API in production mode.
 
-1. Navigate to the server directory:
-    ```sh
-    cd TradeLog/server-1.0.0
-    ```
-2. Start the server:
-    ```sh
-    node ./server.js
-    ```
-Note: This server is a SoftUni Practice-Server and does not persist data. All data will be lost upon server restart.
+### Client (`TradeLogFinal/TradeLog/client`)
+- `npm run dev`: start the Vite dev server.
+- `npm run build`: build the production bundle.
+- `npm run preview`: locally serve the production build.
 
-## Technologies Used
+## Troubleshooting
+- **Address already in use:** stop anything on port `3030` or change `PORT` in `.env`.
+- **MongoDB connection errors:** verify MongoDB is running and the connection string is correct.
+- **CORS errors:** ensure `CORS_ORIGIN` matches the URL serving the frontend.
 
-- **React** - JavaScript library for building user interfaces
-- **React Router** - For handling routing within the application
-- **Fetch API** - For making HTTP requests
-- **CSS Modules** - For styling components
-- **localStorage** - For storing tokens and other client-side information
